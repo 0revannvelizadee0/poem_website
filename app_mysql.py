@@ -4552,15 +4552,6 @@ def migrate_db():
 # ============================================================
 # RUN
 # ============================================================
-
-@app.route('/setup-db')
-def setup_db():
-    try:
-        init_db()
-        return "Tables created successfully!"
-    except Exception as e:
-        return f"Error: {str(e)}", 500
-
 if __name__ == "__main__":
     with app.app_context():
         init_db()
