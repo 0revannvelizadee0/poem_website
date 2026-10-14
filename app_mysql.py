@@ -523,7 +523,7 @@ def init_db():
                 id        INT AUTO_INCREMENT PRIMARY KEY,
                 circle_id INTEGER NOT NULL,
                 user_id   INTEGER NOT NULL,
-                role      TEXT NOT NULL DEFAULT 'member',
+                role      VARCHAR(50) NOT NULL DEFAULT 'member',
                 joined_at TEXT NOT NULL,
                 UNIQUE(circle_id, user_id),
                 FOREIGN KEY (circle_id) REFERENCES salon_circles(id),
@@ -578,10 +578,10 @@ def init_db():
 
         # Safe migration: add encryption columns to messages table if missing
         messages_migrations = [
-            "ALTER TABLE messages ADD COLUMN encrypted_key_sender TEXT NOT NULL DEFAULT ''",
-            "ALTER TABLE messages ADD COLUMN encrypted_key_receiver TEXT NOT NULL DEFAULT ''",
-            "ALTER TABLE messages ADD COLUMN iv TEXT NOT NULL DEFAULT ''",
-            "ALTER TABLE messages ADD COLUMN encrypted_message TEXT NOT NULL DEFAULT ''",
+            "ALTER TABLE messages ADD COLUMN encrypted_key_sender TEXT ''",
+            "ALTER TABLE messages ADD COLUMN encrypted_key_receiver TEXT ''",
+            "ALTER TABLE messages ADD COLUMN iv TEXT ''",
+            "ALTER TABLE messages ADD COLUMN encrypted_message TEXT ''",
         ]
         for sql in messages_migrations:
             try:
@@ -4420,10 +4420,10 @@ def migrate_db():
             WHERE table_schema=DATABASE() AND table_name='messages'
         """).fetchall()}
         needed = {
-            "encrypted_message":      "TEXT NOT NULL DEFAULT ''",
-            "encrypted_key_sender":   "TEXT NOT NULL DEFAULT ''",
-            "encrypted_key_receiver": "TEXT NOT NULL DEFAULT ''",
-            "iv":                     "TEXT NOT NULL DEFAULT ''",
+            "encrypted_message":      "TEXT ''",
+            "encrypted_key_sender":   "TEXT ''",
+            "encrypted_key_receiver": "TEXT ''",
+            "iv":                     "TEXT ''",
         }
         for col, col_def in needed.items():
             if col not in cols:
@@ -4567,6 +4567,7 @@ if __name__ == "__main__":
         seed_badges()
     migrate_db()
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 
 
 
