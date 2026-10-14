@@ -480,7 +480,7 @@ def init_db():
             -- Hidden Poet Game
             CREATE TABLE IF NOT EXISTS daily_game_questions (
                 id          INT AUTO_INCREMENT PRIMARY KEY,
-                game_date   TEXT NOT NULL,
+                game_date   VARCHAR(10) NOT NULL,
                 poem_id     INTEGER NOT NULL,
                 stanza_text TEXT NOT NULL,
                 position    INTEGER NOT NULL,
@@ -490,7 +490,7 @@ def init_db():
             CREATE TABLE IF NOT EXISTS daily_game_attempts (
                 id             INT AUTO_INCREMENT PRIMARY KEY,
                 user_id        INTEGER NOT NULL,
-                game_date      TEXT NOT NULL,
+                game_date      VARCHAR(10) NOT NULL,
                 question_pos   INTEGER NOT NULL,
                 author_guess   TEXT,
                 title_guess    TEXT,
@@ -4567,5 +4567,6 @@ if __name__ == "__main__":
         seed_badges()
     migrate_db()
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 
 
