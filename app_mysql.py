@@ -4518,7 +4518,7 @@ def migrate_db():
         # --- Feature 6: Poem Statistics (view tracking already exists, just need quotes_count) ---
         # poems already have view_count, total_time_spent; we use existing tables for the rest
 
-        # --- Schema constraints: add UNIQUE if not already present (idempotent) ---
+        # --- Schema constraints: add UNIQUE if not already present (idempotent) ---RUN
         constraint_migrations = [
             """
             DO $$ BEGIN
