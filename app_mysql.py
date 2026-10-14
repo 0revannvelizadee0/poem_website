@@ -416,7 +416,7 @@ def init_db():
                 id         INT AUTO_INCREMENT PRIMARY KEY,
                 title      TEXT NOT NULL,
                 creator_id INTEGER NOT NULL,
-                status     TEXT NOT NULL DEFAULT 'active',
+                status     VARCHAR(50) NOT NULL DEFAULT 'active',
                 created_at TEXT NOT NULL,
                 ended_at   TEXT,
                 FOREIGN KEY (creator_id) REFERENCES users(id)
@@ -458,7 +458,7 @@ def init_db():
                 theme_id      INTEGER NOT NULL,
                 challenger_id INTEGER NOT NULL,
                 challenged_id INTEGER NOT NULL,
-                status        TEXT NOT NULL DEFAULT 'pending',
+                status        VARCHAR(50) NOT NULL DEFAULT 'pending',
                 winner_id     INTEGER,
                 created_at    TEXT NOT NULL,
                 FOREIGN KEY (theme_id)      REFERENCES weekly_themes(id),
@@ -4567,4 +4567,5 @@ if __name__ == "__main__":
         seed_badges()
     migrate_db()
     app.run(host="0.0.0.0", port=5000, debug=True)
+
 
